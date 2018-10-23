@@ -22,6 +22,11 @@ export class GithubApiService {
     return this.http.get(url);
   }
 
+  getCurrentUser() {
+    const url = `${this.apiEndpoint}/user`;
+    return this.http.get(url);
+  }
+
   getFollowers(login: string, pageIndex: number, pageSize: number) {
     const paging = this.getPageQueryString(pageIndex, pageSize);
     const url = `${this.apiEndpoint}/users/${login}/followers?` + paging;

@@ -4,7 +4,7 @@
     class="repo"
     *ngFor="let repo of repos"
   >
-    <h4>{{repo.name}}</h4>
+    <h4><a class="repo-link" [href]="repo.html_url" target="_blank">{{repo.name}}</a></h4>
     <mat-card-subtitle>{{repo.description}}</mat-card-subtitle>
   </mat-card>
 

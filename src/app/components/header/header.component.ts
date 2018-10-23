@@ -28,7 +28,10 @@ export class HeaderComponent implements OnInit {
   }
 
   userName() {
-    return this.auth.getUserName();
+    const user = this.auth.getUser();
+    if (user) {
+      return user.name || user.email || user.login;
+    }
   }
 
   handleUserProfileClick() {

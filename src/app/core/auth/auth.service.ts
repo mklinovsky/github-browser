@@ -1,30 +1,30 @@
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
+import { GithubApiService } from '../../services/github-api.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  authToken = '';
-  user: any;
 
   constructor(
-    private afAuth: AngularFireAuth
+    private afAuth: AngularFireAuth,
+    private githubApi: GithubApiService
   ) { }
 
   login() {
     this.afAuth.auth.signInWithPopup(new auth.GithubAuthProvider())
       .then(result => {
         const credential: any = result.credential;
-        const userName = result.user.displayName || result.user.email;
-
-        this.storeAuthData(credential.accessToken, userName);
+        this.storeAuthToken(credential.accessToken);
+        this.storeUserData();
       });
   }
 
   logout() {
-    this.deleteAuthData();
+    this.deleteAuthToken();
+    this.deleteUserData();
     this.afAuth.auth.signOut();
   }
 
@@ -36,17 +36,29 @@ export class AuthService {
     return sessionStorage.getItem('authToken');
   }
 
-  getUserName() {
-    return sessionStorage.getItem('userName');
+  getUser() {
+    const user = sessionStorage.getItem('userData');
+    return JSON.parse(user);
   }
 
-  private storeAuthData(token: string, userName: string) {
+  private storeUserData() {
+    this.githubApi.getCurrentUser()
+      .subscribe(result => {
+        if (result) {
+          sessionStorage.setItem('userData', JSON.stringify(result));
+        }
+      });
+  }
+
+  private storeAuthToken(token: string) {
     sessionStorage.setItem('authToken', token);
-    sessionStorage.setItem('userName', userName);
   }
 
-  private deleteAuthData() {
+  private deleteAuthToken() {
     sessionStorage.removeItem('authToken');
-    sessionStorage.removeItem('userName');
+  }
+
+  private deleteUserData() {
+    sessionStorage.removeItem('userData');
   }
 }
