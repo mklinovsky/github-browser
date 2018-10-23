@@ -1,0 +1,29 @@
+<mat-toolbar color="primary">
+  <mat-toolbar-row>
+    <span>GitHub Browser</span>
+    <span class="spacer"></span>
+    <button
+      *ngIf="!userLoggedIn()"
+      mat-button
+      (click)="login()"
+    >
+      Login
+    </button>
+    <ng-container *ngIf="userLoggedIn()">
+      <button
+        mat-button
+        (click)="handleUserProfileClick()"
+      >
+        <mat-icon>account_circle</mat-icon>
+        {{userName()}}
+      </button>
+      <button
+        mat-button
+        (click)="logout()"
+      >
+        <mat-icon>power_settings_new</mat-icon>
+        Logout
+      </button>
+    </ng-container>
+  </mat-toolbar-row>
+</mat-toolbar>
