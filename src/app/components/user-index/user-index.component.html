@@ -1,21 +1,25 @@
-<div class="user-index">
-  <mat-card>
-    <form
-      class="search-form"
-      [formGroup]="searchForm"
-      (ngSubmit)="onSubmit()"
-    >
-      <mat-form-field class="search-field">
-        <input
-          matInput
-          placeholder="Enter location"
-          formControlName="location"
-        >
-      </mat-form-field>
-      <button
-        mat-raised-button
-        color="primary"
-      >Search users</button>
-    </form>
-  </mat-card>
-</div>
+<mat-card>
+  <form
+    class="search-form"
+    [formGroup]="searchForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <mat-form-field class="search-field">
+      <input
+        matInput
+        placeholder="Enter location"
+        formControlName="location"
+      >
+    </mat-form-field>
+    <button
+      mat-raised-button
+      color="primary"
+    >Search users</button>
+  </form>
+
+  <ghb-user-list
+    *ngIf="searchResult"
+    [searchResult]="searchResult"
+  >
+  </ghb-user-list>
+</mat-card>

@@ -12,12 +12,12 @@ export class GithubApiService {
   ) { }
 
   getUsersByLocation(location: string) {
-    const url = encodeURI(`${this.apiEndpoint}/search/users?q=location:${location}`);
+    const url = `${this.apiEndpoint}/search/users?q=location:${encodeURIComponent(location)}`;
     return this.http.get(url);
   }
 
   getUser(username: string) {
-    const url = encodeURI(`${this.apiEndpoint}/users/${username}`);
+    const url = `${this.apiEndpoint}/users/${username}`;
     return this.http.get(url);
   }
 }

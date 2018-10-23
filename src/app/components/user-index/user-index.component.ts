@@ -9,6 +9,7 @@ import { GithubApiService } from '../../services/github-api.service';
 })
 export class UserIndexComponent implements OnInit {
   searchForm: FormGroup;
+  searchResult: any;
 
   constructor(
     private githubApi: GithubApiService
@@ -25,7 +26,7 @@ export class UserIndexComponent implements OnInit {
 
     this.githubApi.getUsersByLocation(location)
       .subscribe(result => {
-        console.log(result);
+        this.searchResult = result;
       });
   }
 }

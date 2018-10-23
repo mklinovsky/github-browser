@@ -12,6 +12,7 @@ import { UserIndexComponent } from './components/user-index/user-index.component
 import { UserDetailComponent } from './components/user-detail/user-detail.component';
 import { environment } from '../environments/environment';
 import { HeaderComponent } from './components/header/header.component';
+import { UserListComponent } from './components/user-list/user-list.component';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { HeaderComponent } from './components/header/header.component';
     AppComponent,
     UserIndexComponent,
     UserDetailComponent,
-    HeaderComponent
+    HeaderComponent,
+    UserListComponent
   ],
   imports: [
     BrowserModule,
