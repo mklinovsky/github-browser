@@ -1,16 +1,22 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'ghb-user-list',
   templateUrl: './user-list.component.html',
   styleUrls: ['./user-list.component.scss']
 })
-export class UserListComponent implements OnInit {
+export class UserListComponent {
   @Input() searchResult: any;
+  @Input() page: number;
+  @Input() pageSize: number;
+
+  @Output() pageEvent = new EventEmitter<any>();
+
+  pageSizeOptions = [5, 10, 20, 30];
 
   constructor() { }
 
-  ngOnInit() {
+  onPageEvent(page) {
+    this.pageEvent.emit(page);
   }
-
 }

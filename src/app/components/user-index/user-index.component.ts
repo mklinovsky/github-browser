@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { GithubApiService } from '../../services/github-api.service';
+import { UserSearchRequest } from '../../models/user-search-request';
 
 @Component({
   selector: 'ghb-user-index',
@@ -10,6 +11,14 @@ import { GithubApiService } from '../../services/github-api.service';
 export class UserIndexComponent implements OnInit {
   searchForm: FormGroup;
   searchResult: any;
+  sortOptions = [
+    { value: 'repositories.desc', text: 'Most repositories' },
+    { value: 'repositories.asc', text: 'Fewest repositories' },
+    { value: 'followers.desc', text: 'Most followers' },
+    { value: 'followers.asc', text: 'Fewest followers' },
+    { value: 'joined.desc', text: 'Most recently joined' },
+    { value: 'joined.asc', text: 'Least recently joined' }
+  ];
 
   constructor(
     private githubApi: GithubApiService
@@ -17,14 +26,32 @@ export class UserIndexComponent implements OnInit {
 
   ngOnInit() {
     this.searchForm = new FormGroup({
-      location: new FormControl('')
+      location: new FormControl('slovakia'),
+      sortOrder: new FormControl('repositories.desc')
     });
   }
 
   onSubmit() {
-    const location = this.searchForm.value.location;
+    this.getUsers();
+  }
 
-    this.githubApi.getUsersByLocation(location)
+  onSortOrderChange() {
+    const location = this.searchForm.value.location;
+    if (location) {
+      this.getUsers();
+    }
+  }
+
+  onPageEvent(page) {
+    this.getUsers(page.pageIndex + 1, page.pageSize);
+  }
+
+  private getUsers(page = 1, pageSize = 5) {
+    const location = this.searchForm.value.location;
+    const sortOrder = this.searchForm.value.sortOrder.split('.');
+
+    this.githubApi.getUsersByLocation(
+      new UserSearchRequest(location, sortOrder[0], sortOrder[1], page, pageSize))
       .subscribe(result => {
         this.searchResult = result;
       });

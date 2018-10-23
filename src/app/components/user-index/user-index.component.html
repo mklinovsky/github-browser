@@ -11,15 +11,30 @@
         formControlName="location"
       >
     </mat-form-field>
+    <mat-form-field class="select-field">
+      <mat-select
+        placeholder="Sort By"
+        formControlName="sortOrder"
+        (selectionChange)="onSortOrderChange()"
+      >
+        <mat-option *ngFor="let sort of sortOptions" [value]="sort.value">
+          {{sort.text}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
     <button
       mat-raised-button
       color="primary"
-    >Search users</button>
+    >
+      Search users
+    </button>
   </form>
+
 
   <ghb-user-list
     *ngIf="searchResult"
     [searchResult]="searchResult"
+    (pageEvent)="onPageEvent($event)"    
   >
   </ghb-user-list>
 </mat-card>
