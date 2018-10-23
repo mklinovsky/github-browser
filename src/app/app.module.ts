@@ -13,6 +13,7 @@ import { UserDetailComponent } from './components/user-detail/user-detail.compon
 import { environment } from '../environments/environment';
 import { HeaderComponent } from './components/header/header.component';
 import { UserListComponent } from './components/user-list/user-list.component';
+import { ReposListComponent } from './components/repos-list/repos-list.component';
 
 
 @NgModule({
@@ -21,7 +22,8 @@ import { UserListComponent } from './components/user-list/user-list.component';
     UserIndexComponent,
     UserDetailComponent,
     HeaderComponent,
-    UserListComponent
+    UserListComponent,
+    ReposListComponent
   ],
   imports: [
     BrowserModule,

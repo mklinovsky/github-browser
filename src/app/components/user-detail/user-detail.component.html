@@ -4,7 +4,7 @@
     <mat-card-title>{{user.name || user.email || user.login}}</mat-card-title>
     <mat-card-subtitle>{{user.bio}}</mat-card-subtitle>
     <mat-card-subtitle>Folowers: {{user.followers}}</mat-card-subtitle>
-    <mat-card-subtitle>Repositories: {{user.followers}}</mat-card-subtitle>
+    <mat-card-subtitle>Repositories: {{user.public_repos}}</mat-card-subtitle>
   </div>
 </mat-card>
 
@@ -12,7 +12,14 @@
   *ngIf="followersResult"
   [users]="followersResult"
   [totalCount]="user.followers"
-  [title]="'Followers'"
-  (pageEvent)="onPageEvent($event)"
+  [title]="followersTitle"
+  (pageEvent)="onFollowersPageEvent($event)"
 >
 </ghb-user-list>
+<ghb-repos-list
+  *ngIf="reposResult"
+  [repos]="reposResult"
+  [totalCount]="user.public_repos"
+  (pageEvent)="onReposPageEvent($event)"
+>
+</ghb-repos-list>

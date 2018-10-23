@@ -28,8 +28,9 @@ export class GithubApiService {
     return this.http.get(url);
   }
 
-  getRepositiories(login: string) {
-    const url = `${this.apiEndpoint}/users/${login}/repos`;
+  getRepositiories(login: string, pageIndex: number, pageSize: number) {
+    const paging = this.getPageQueryString(pageIndex, pageSize);
+    const url = `${this.apiEndpoint}/users/${login}/repos?` + paging;
     return this.http.get(url);
   }
 
@@ -41,6 +42,6 @@ export class GithubApiService {
   }
 
   private getPageQueryString(pageIndex: number, pageSize:number) {
-    return `page=${pageIndex}&per_page=${pageSize}`;
+    return `page=${pageIndex + 1}&per_page=${pageSize}`;
   }
 }

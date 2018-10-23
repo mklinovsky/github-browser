@@ -11,6 +11,8 @@ import { GithubApiService } from '../../services/github-api.service';
 export class UserDetailComponent implements OnInit {
   user: any;
   followersResult: any;
+  followersTitle: string;
+  reposResult: any;
 
   constructor(
     private route: ActivatedRoute,
@@ -22,18 +24,31 @@ export class UserDetailComponent implements OnInit {
       switchMap((params: ParamMap) => this.githubApi.getUser(params.get('id')))
     ).subscribe((result: any) => {
       this.user = result;
-      this.getFollowers(result.login, 1, 5);
+      this.getFollowers(result.login, 0, 5);
+      this.getRepos(result.login, 0, 5);
     });
   }
 
-  onPageEvent(page) {
-    this.getFollowers(this.user.login, page.pageIndex + 1, page.pageSize);
+  onFollowersPageEvent(page) {
+    this.getFollowers(this.user.login, page.pageIndex, page.pageSize);
+  }
+
+  onReposPageEvent(page) {
+    this.getRepos(this.user.login, page.pageIndex, page.pageSize);
   }
 
   private getFollowers(login: string, pageIndex: number, pageSize: number) {
     this.githubApi.getFollowers(login, pageIndex, pageSize)
       .subscribe(result => {
         this.followersResult = result;
+        this.followersTitle = `Followers (${this.user.followers})`;
+      });
+  }
+
+  private getRepos(login: string, pageIndex: number, pageSize: number) {
+    this.githubApi.getRepositiories(login, pageIndex, pageSize)
+      .subscribe(result => {
+        this.reposResult = result;
       });
   }
 }

@@ -47,10 +47,10 @@ export class UserIndexComponent implements OnInit {
   }
 
   onPageEvent(page) {
-    this.getUsers(page.pageIndex + 1, page.pageSize);
+    this.getUsers(page.pageIndex, page.pageSize);
   }
 
-  private getUsers(page = 1, pageSize = 5) {
+  private getUsers(page = 0, pageSize = 5) {
     const location = this.searchForm.value.location;
     const sortOrder = this.searchForm.value.sortOrder.split('.');
 
