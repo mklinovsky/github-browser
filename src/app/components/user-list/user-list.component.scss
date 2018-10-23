@@ -1,6 +1,11 @@
-.mat-card {
+.user {
   display: flex;
   margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.list {
+  background: rgba(0,0,0,.03);
 }
 
 img {

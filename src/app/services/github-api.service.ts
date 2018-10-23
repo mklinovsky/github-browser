@@ -17,15 +17,30 @@ export class GithubApiService {
     return this.http.get(url);
   }
 
-  getUser(username: string) {
-    const url = `${this.apiEndpoint}/users/${username}`;
+  getUser(login: string) {
+    const url = `${this.apiEndpoint}/users/${login}`;
+    return this.http.get(url);
+  }
+
+  getFollowers(login: string, pageIndex: number, pageSize: number) {
+    const paging = this.getPageQueryString(pageIndex, pageSize);
+    const url = `${this.apiEndpoint}/users/${login}/followers?` + paging;
+    return this.http.get(url);
+  }
+
+  getRepositiories(login: string) {
+    const url = `${this.apiEndpoint}/users/${login}/repos`;
     return this.http.get(url);
   }
 
   private createQueryStringFromRequest(request: UserSearchRequest): string {
     const sortOrder = `&sort=${request.sort}&order=${request.order}`;
-    const paging = `&page=${request.page}&per_page=${request.pageSize}`;
+    const paging = this.getPageQueryString(request.page, request.pageSize);
 
-    return `q=location:${encodeURIComponent(request.location)}` + sortOrder + paging;
+    return `q=location:${encodeURIComponent(request.location)}` + sortOrder + '&' + paging;
+  }
+
+  private getPageQueryString(pageIndex: number, pageSize:number) {
+    return `page=${pageIndex}&per_page=${pageSize}`;
   }
 }

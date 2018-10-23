@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { GithubApiService } from '../../services/github-api.service';
 import { UserSearchRequest } from '../../models/user-search-request';
@@ -20,6 +20,8 @@ export class UserIndexComponent implements OnInit {
     { value: 'joined.asc', text: 'Least recently joined' }
   ];
 
+  @ViewChild("searchInput") searchInput: ElementRef;
+
   constructor(
     private githubApi: GithubApiService
   ) { }
@@ -29,6 +31,8 @@ export class UserIndexComponent implements OnInit {
       location: new FormControl('slovakia'),
       sortOrder: new FormControl('repositories.desc')
     });
+
+    this.searchInput.nativeElement.focus();
   }
 
   onSubmit() {

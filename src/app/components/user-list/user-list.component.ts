@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ghb-user-list',
@@ -6,17 +7,22 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
   styleUrls: ['./user-list.component.scss']
 })
 export class UserListComponent {
-  @Input() searchResult: any;
-  @Input() page: number;
-  @Input() pageSize: number;
-
+  @Input() users: any;
+  @Input() totalCount: number;
+  @Input() title: string;
   @Output() pageEvent = new EventEmitter<any>();
 
   pageSizeOptions = [5, 10, 20, 30];
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   onPageEvent(page) {
     this.pageEvent.emit(page);
+  }
+
+  handleUserClick(login: string) {
+    this.router.navigate([`/user/${login}`]);
   }
 }

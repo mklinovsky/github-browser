@@ -1,6 +1,6 @@
 <mat-toolbar color="primary">
   <mat-toolbar-row>
-    <span>GitHub Browser</span>
+    <a [routerLink]="['/']">GitHub Browser</a>
     <span class="spacer"></span>
     <button
       *ngIf="!userLoggedIn()"

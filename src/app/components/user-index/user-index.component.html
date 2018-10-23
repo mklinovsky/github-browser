@@ -6,6 +6,7 @@
   >
     <mat-form-field class="search-field">
       <input
+        #searchInput
         matInput
         placeholder="Enter location"
         formControlName="location"
@@ -33,8 +34,9 @@
 
   <ghb-user-list
     *ngIf="searchResult"
-    [searchResult]="searchResult"
-    (pageEvent)="onPageEvent($event)"    
+    [users]="searchResult.items"
+    [totalCount]="searchResult.total_count"
+    (pageEvent)="onPageEvent($event)"
   >
   </ghb-user-list>
 </mat-card>
