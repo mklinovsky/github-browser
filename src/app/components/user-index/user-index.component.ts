@@ -30,7 +30,7 @@ export class UserIndexComponent implements OnInit {
 
   ngOnInit() {
     this.searchForm = new FormGroup({
-      location: new FormControl('slovakia'),
+      location: new FormControl(''),
       sortOrder: new FormControl('repositories.desc')
     });
 
