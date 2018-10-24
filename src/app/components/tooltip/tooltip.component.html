@@ -1,0 +1,28 @@
+<div
+  *ngIf="showTooltip"
+  [ngStyle]="positionStyle"
+  class="tooltip"
+>
+<mat-card
+*ngIf="loaded"
+class="user"
+>
+<img
+  [src]="user.avatar_url"
+  width="100"
+  height="100"
+>
+<div>
+  <mat-card-title>{{user.name || user.email || user.login}} <span
+      *ngIf="isCurrentUser"
+      class="my-profile"
+    >(my profile)</span></mat-card-title>
+  <mat-card-subtitle>{{user.bio}}</mat-card-subtitle>
+  <mat-card-subtitle>Folowers: {{user.followers}}</mat-card-subtitle>
+  <mat-card-subtitle>Repositories: {{user.public_repos}}</mat-card-subtitle>
+</div>
+</mat-card>
+<mat-card *ngIf="!loaded">
+  <mat-spinner></mat-spinner>
+</mat-card>
+</div>

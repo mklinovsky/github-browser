@@ -1,8 +1,9 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ErrorHandler } from '@angular/core';
 import { MaterialModule } from './material.module';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { AppErrorHandler } from './app-error-handler';
 
 @NgModule({
   imports: [ ],
@@ -16,6 +17,10 @@ import { AuthInterceptor } from './auth/auth.interceptor';
       useClass: AuthInterceptor,
       multi: true
     },
+    {
+      provide: ErrorHandler,
+      useClass: AppErrorHandler,
+    }
   ]
 })
 export class CoreModule { }

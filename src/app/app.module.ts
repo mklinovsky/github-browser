@@ -16,6 +16,7 @@ import { UserListComponent } from './components/user-list/user-list.component';
 import { ReposListComponent } from './components/repos-list/repos-list.component';
 import { IssuesComponent } from './components/issues/issues.component';
 import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { TooltipComponent } from './components/tooltip/tooltip.component';
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     UserListComponent,
     ReposListComponent,
     IssuesComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    TooltipComponent
   ],
   imports: [
     BrowserModule,
@@ -37,9 +39,7 @@ import { PageNotFoundComponent } from './components/page-not-found/page-not-foun
     AngularFireModule.initializeApp(environment.firebase),
     CoreModule,
     ReactiveFormsModule
-  ],
-  providers: [
-  ],
+  ],  
   bootstrap: [
     AppComponent
   ]

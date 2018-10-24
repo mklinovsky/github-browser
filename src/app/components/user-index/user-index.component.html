@@ -18,7 +18,10 @@
         formControlName="sortOrder"
         (selectionChange)="onSortOrderChange()"
       >
-        <mat-option *ngFor="let sort of sortOptions" [value]="sort.value">
+        <mat-option
+          *ngFor="let sort of sortOptions"
+          [value]="sort.value"
+        >
           {{sort.text}}
         </mat-option>
       </mat-select>
@@ -30,7 +33,6 @@
       Search users
     </button>
   </form>
-
 
   <ghb-user-list
     *ngIf="searchResult"

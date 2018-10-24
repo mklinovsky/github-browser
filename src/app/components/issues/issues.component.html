@@ -6,7 +6,9 @@
       mat-raised-button
       color="accent"
       (click)="onMyAndMemberClick()"
-    >My and member issues</button>
+    >
+      My and member issues
+    </button>
     <div class="organization">
       <mat-form-field class="organization-field">
         <input
@@ -21,7 +23,9 @@
         color="accent"
         [disabled]="!orgButtonEnabled"
         (click)="onOrgClick()"
-      >Organization issues</button>
+      >
+        Organization issues
+      </button>
     </div>
   </div>
 
@@ -29,11 +33,15 @@
     class="issue"
     *ngFor="let issue of issues"
   >
-    <h4><a
+    <h4>
+      <a
         class="issue-link"
         [href]="issue.html_url"
         target="_blank"
-      >{{issue.title}}</a></h4>
+      >
+        {{issue.title}}
+      </a>
+    </h4>
     <mat-card-subtitle>Repository: {{issue.repository.name}}</mat-card-subtitle>
     <mat-card-subtitle>{{issue.state}}</mat-card-subtitle>
   </mat-card>

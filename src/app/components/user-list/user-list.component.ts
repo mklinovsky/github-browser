@@ -34,7 +34,6 @@ export class UserListComponent {
   }
 
   onImgMouseEnter(e, user) {
-    console.log(e, user);
     this.showUserDetails = true;
     this.userDetailsPositionStyle = {
       top: e.clientY + 10 + 'px',
