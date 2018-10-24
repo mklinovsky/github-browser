@@ -15,6 +15,7 @@ import { HeaderComponent } from './components/header/header.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { ReposListComponent } from './components/repos-list/repos-list.component';
 import { IssuesComponent } from './components/issues/issues.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
 
 
 @NgModule({
@@ -25,7 +26,8 @@ import { IssuesComponent } from './components/issues/issues.component';
     HeaderComponent,
     UserListComponent,
     ReposListComponent,
-    IssuesComponent
+    IssuesComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
