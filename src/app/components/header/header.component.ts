@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../core/auth/auth.service';
 
@@ -7,7 +7,7 @@ import { AuthService } from '../../core/auth/auth.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   userName: string;
 
   constructor(
@@ -15,9 +15,6 @@ export class HeaderComponent implements OnInit {
     private cd: ChangeDetectorRef,
     private router: Router
   ) { }
-
-  ngOnInit() {
-  }
 
   login() {
     this.auth.login()
@@ -42,7 +39,7 @@ export class HeaderComponent implements OnInit {
     if (user) {
       return user.name || user.email || user.login;
     }
-  }  
+  }
 
   handleUserProfileClick() {
     const login = this.auth.getUser().login;

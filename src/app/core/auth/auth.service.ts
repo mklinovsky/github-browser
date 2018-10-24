@@ -9,6 +9,7 @@ import { switchMap, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class AuthService {
+  private authToken: string;
 
   constructor(
     private afAuth: AngularFireAuth,
@@ -24,7 +25,9 @@ export class AuthService {
     const login$ = signIn$.pipe(
       switchMap(signInResult => {
         const credential: any = signInResult.credential;
+        this.authToken = credential.accessToken;
         this.storeAuthToken(credential.accessToken);
+
         return this.githubApi.getCurrentUser();
       }),
       tap(user => {
@@ -46,7 +49,12 @@ export class AuthService {
   }
 
   getAuthToken(): string {
-    return sessionStorage.getItem('authToken');
+    if (this.authToken) {
+      return this.authToken;
+    }
+
+    this.authToken = sessionStorage.getItem('authToken');
+    return this.authToken;
   }
 
   getUser() {
@@ -59,6 +67,7 @@ export class AuthService {
   }
 
   private deleteAuthToken() {
+    this.authToken = '';
     sessionStorage.removeItem('authToken');
   }
 

@@ -21,7 +21,7 @@ export class IssuesComponent implements OnInit {
     this.organization.valueChanges
       .subscribe(value => {
         this.orgButtonEnabled = value;
-      })
+      });
 
     this.getIssues();
   }
@@ -35,7 +35,7 @@ export class IssuesComponent implements OnInit {
     this.githubApi.getOrganizationIssues(this.organization.value)
       .subscribe(result => {
         this.issues = result;
-      })
+      });
   }
 
   private getIssues() {

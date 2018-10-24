@@ -45,7 +45,7 @@ export class GithubApiService {
   }
 
   getOrganizationIssues(org: string) {
-    const url = `${this.apiEndpoint}/orgs/${org}/issues`;
+    const url = `${this.apiEndpoint}/orgs/${encodeURIComponent(org)}/issues`;
     return this.http.get(url);
   }
 
