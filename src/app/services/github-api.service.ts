@@ -46,7 +46,7 @@ export class GithubApiService {
     return `q=location:${encodeURIComponent(request.location)}` + sortOrder + '&' + paging;
   }
 
-  private getPageQueryString(pageIndex: number, pageSize:number) {
+  private getPageQueryString(pageIndex: number, pageSize: number) {
     return `page=${pageIndex + 1}&per_page=${pageSize}`;
   }
 }

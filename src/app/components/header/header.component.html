@@ -15,7 +15,7 @@
         (click)="handleUserProfileClick()"
       >
         <mat-icon>account_circle</mat-icon>
-        {{userName()}}
+        {{userName || getUserName()}}
       </button>
       <button
         mat-button

@@ -20,7 +20,7 @@ export class UserIndexComponent implements OnInit {
     { value: 'joined.asc', text: 'Least recently joined' }
   ];
 
-  @ViewChild("searchInput") searchInput: ElementRef;
+  @ViewChild('searchInput') searchInput: ElementRef;
 
   constructor(
     private githubApi: GithubApiService

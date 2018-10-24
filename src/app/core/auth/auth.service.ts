@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { auth } from 'firebase/app';
 import { GithubApiService } from '../../services/github-api.service';
+import { from } from 'rxjs';
+import { switchMap, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -14,12 +16,20 @@ export class AuthService {
   ) { }
 
   login() {
-    this.afAuth.auth.signInWithPopup(new auth.GithubAuthProvider())
-      .then(result => {
-        const credential: any = result.credential;
+    const signInPromise = this.afAuth.auth.signInWithPopup(new auth.GithubAuthProvider());
+    const signIn$ = from(signInPromise);
+    const login$ = signIn$.pipe(
+      switchMap(signInResult => {
+        const credential: any = signInResult.credential;
         this.storeAuthToken(credential.accessToken);
-        this.storeUserData();
-      });
+        return this.githubApi.getCurrentUser();
+      }),
+      tap(user => {
+        sessionStorage.setItem('userData', JSON.stringify(user));
+      })
+    );
+
+    return login$;
   }
 
   logout() {
@@ -39,15 +49,6 @@ export class AuthService {
   getUser() {
     const user = sessionStorage.getItem('userData');
     return JSON.parse(user);
-  }
-
-  private storeUserData() {
-    this.githubApi.getCurrentUser()
-      .subscribe(result => {
-        if (result) {
-          sessionStorage.setItem('userData', JSON.stringify(result));
-        }
-      });
   }
 
   private storeAuthToken(token: string) {
