@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { switchMap } from 'rxjs/operators';
 import { ActivatedRoute, ParamMap } from '@angular/router';
 import { GithubApiService } from '../../services/github-api.service';
+import { AuthService } from '../../core/auth/auth.service';
 
 @Component({
   selector: 'ghb-user-detail',
@@ -13,10 +14,12 @@ export class UserDetailComponent implements OnInit {
   followersResult: any;
   followersTitle: string;
   reposResult: any;
+  isCurrentUser: boolean;
 
   constructor(
     private route: ActivatedRoute,
-    private githubApi: GithubApiService
+    private githubApi: GithubApiService,
+    private auth: AuthService
   ) { }
 
   ngOnInit() {
@@ -24,6 +27,7 @@ export class UserDetailComponent implements OnInit {
       switchMap((params: ParamMap) => this.githubApi.getUser(params.get('id')))
     ).subscribe((result: any) => {
       this.user = result;
+      this.isCurrentUser = this.isLoggedInUser(result.login);
       this.getFollowers(result.login, 0, 5);
       this.getRepos(result.login, 0, 5);
     });
@@ -50,5 +54,10 @@ export class UserDetailComponent implements OnInit {
       .subscribe(result => {
         this.reposResult = result;
       });
+  }
+
+  private isLoggedInUser(login: string): boolean {
+    const loggedUser = this.auth.getUser();
+    return loggedUser && loggedUser.login === login;
   }
 }

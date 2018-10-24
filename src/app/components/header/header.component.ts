@@ -1,4 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Router } from '@angular/router';
 import { AuthService } from '../../core/auth/auth.service';
 
 @Component({
@@ -11,7 +12,8 @@ export class HeaderComponent implements OnInit {
 
   constructor(
     private auth: AuthService,
-    private cd: ChangeDetectorRef
+    private cd: ChangeDetectorRef,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -43,6 +45,9 @@ export class HeaderComponent implements OnInit {
   }
 
   handleUserProfileClick() {
-
+    const login = this.auth.getUser().login;
+    if (login) {
+      this.router.navigate([`/user/${login}`]);
+    }
   }
 }

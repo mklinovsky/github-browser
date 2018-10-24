@@ -1,7 +1,7 @@
 <mat-card *ngIf="user" class="user">
   <img [src]="user.avatar_url" width="100" height="100">
   <div>
-    <mat-card-title>{{user.name || user.email || user.login}}</mat-card-title>
+    <mat-card-title>{{user.name || user.email || user.login}} <span *ngIf="isCurrentUser" class="my-profile">(my profile)</span></mat-card-title>
     <mat-card-subtitle>{{user.bio}}</mat-card-subtitle>
     <mat-card-subtitle>Folowers: {{user.followers}}</mat-card-subtitle>
     <mat-card-subtitle>Repositories: {{user.public_repos}}</mat-card-subtitle>
@@ -23,3 +23,7 @@
   (pageEvent)="onReposPageEvent($event)"
 >
 </ghb-repos-list>
+
+<ng-container *ngIf="isCurrentUser">
+  
+</ng-container>
