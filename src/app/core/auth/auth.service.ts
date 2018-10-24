@@ -16,7 +16,10 @@ export class AuthService {
   ) { }
 
   login() {
-    const signInPromise = this.afAuth.auth.signInWithPopup(new auth.GithubAuthProvider());
+    const provider = new auth.GithubAuthProvider();
+    provider.addScope('repo');
+
+    const signInPromise = this.afAuth.auth.signInWithPopup(provider);
     const signIn$ = from(signInPromise);
     const login$ = signIn$.pipe(
       switchMap(signInResult => {
