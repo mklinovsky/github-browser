@@ -39,6 +39,16 @@ export class GithubApiService {
     return this.http.get(url);
   }
 
+  getIssues() {
+    const url = `${this.apiEndpoint}/issues`;
+    return this.http.get(url);
+  }
+
+  getOrganizationIssues(org: string) {
+    const url = `${this.apiEndpoint}/orgs/${org}/issues`;
+    return this.http.get(url);
+  }
+
   private createQueryStringFromRequest(request: UserSearchRequest): string {
     const sortOrder = `&sort=${request.sort}&order=${request.order}`;
     const paging = this.getPageQueryString(request.page, request.pageSize);

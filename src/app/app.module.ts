@@ -14,6 +14,7 @@ import { environment } from '../environments/environment';
 import { HeaderComponent } from './components/header/header.component';
 import { UserListComponent } from './components/user-list/user-list.component';
 import { ReposListComponent } from './components/repos-list/repos-list.component';
+import { IssuesComponent } from './components/issues/issues.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { ReposListComponent } from './components/repos-list/repos-list.component
     UserDetailComponent,
     HeaderComponent,
     UserListComponent,
-    ReposListComponent
+    ReposListComponent,
+    IssuesComponent
   ],
   imports: [
     BrowserModule,
