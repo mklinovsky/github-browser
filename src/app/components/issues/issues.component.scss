@@ -3,3 +3,30 @@
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
+.issue {
+  margin-bottom: 5px;
+}
+
+.issue-link {
+  text-decoration: none;
+  color: black;
+}
+
+.mat-card-subtitle {
+  margin-bottom: 5px;
+}
+
+.issues-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.issues-header-button {
+  margin-left: 25px;
+}
+
+.organization {
+  margin-left: 100px;
+}

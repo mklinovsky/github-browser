@@ -40,7 +40,7 @@ export class GithubApiService {
   }
 
   getIssues() {
-    const url = `${this.apiEndpoint}/issues`;
+    const url = `${this.apiEndpoint}/issues?filter=all`;
     return this.http.get(url);
   }
 

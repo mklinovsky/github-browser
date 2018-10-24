@@ -42,7 +42,7 @@ export class HeaderComponent implements OnInit {
     if (user) {
       return user.name || user.email || user.login;
     }
-  }
+  }  
 
   handleUserProfileClick() {
     const login = this.auth.getUser().login;
