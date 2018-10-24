@@ -11,6 +11,7 @@ export class IssuesComponent implements OnInit {
   issues: any;
   organization: FormControl;
   orgButtonEnabled: boolean;
+  loading: boolean;
 
   constructor(
     private githubApi: GithubApiService
@@ -32,16 +33,20 @@ export class IssuesComponent implements OnInit {
 
   onOrgClick() {
     this.issues = [];
+    this.loading = true;
     this.githubApi.getOrganizationIssues(this.organization.value)
       .subscribe(result => {
+        this.loading = false;
         this.issues = result;
       });
   }
 
   private getIssues() {
     this.issues = [];
+    this.loading = true;
     this.githubApi.getIssues()
       .subscribe(result => {
+        this.loading = false;
         this.issues = result;
       });
   }

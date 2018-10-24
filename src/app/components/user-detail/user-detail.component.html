@@ -30,6 +30,14 @@
   (pageEvent)="onFollowersPageEvent($event)"
 >
 </ghb-user-list>
+
+<div
+  class="spinner"
+  *ngIf="loadingFollowers"
+>
+  <mat-spinner></mat-spinner>
+</div>
+
 <ghb-repos-list
   *ngIf="reposResult"
   [repos]="reposResult"
@@ -37,3 +45,10 @@
   (pageEvent)="onReposPageEvent($event)"
 >
 </ghb-repos-list>
+
+<div
+  class="spinner"
+  *ngIf="loadingRepos"
+>
+  <mat-spinner></mat-spinner>
+</div>

@@ -46,3 +46,10 @@
     <mat-card-subtitle>{{issue.state}}</mat-card-subtitle>
   </mat-card>
 </mat-card>
+
+<div
+  class="spinner"
+  *ngIf="loading"
+>
+  <mat-spinner></mat-spinner>
+</div>

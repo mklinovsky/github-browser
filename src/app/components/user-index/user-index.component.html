@@ -34,6 +34,13 @@
     </button>
   </form>
 
+  <div
+    class="spinner"
+    *ngIf="loading"
+  >
+    <mat-spinner></mat-spinner>
+  </div>
+
   <ghb-user-list
     *ngIf="searchResult"
     [users]="searchResult.items"

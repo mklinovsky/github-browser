@@ -11,6 +11,8 @@ import { UserSearchRequest } from '../../models/user-search-request';
 export class UserIndexComponent implements OnInit {
   searchForm: FormGroup;
   searchResult: any;
+  loading: boolean;
+
   sortOptions = [
     { value: 'repositories.desc', text: 'Most repositories' },
     { value: 'repositories.asc', text: 'Fewest repositories' },
@@ -54,9 +56,11 @@ export class UserIndexComponent implements OnInit {
     const location = this.searchForm.value.location;
     const sortOrder = this.searchForm.value.sortOrder.split('.');
 
+    this.loading = true;
     this.githubApi.getUsersByLocation(
       new UserSearchRequest(location, sortOrder[0], sortOrder[1], page, pageSize))
       .subscribe(result => {
+        this.loading = false;
         this.searchResult = result;
       });
   }

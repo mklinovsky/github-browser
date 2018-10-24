@@ -15,6 +15,8 @@ export class UserDetailComponent implements OnInit {
   followersTitle: string;
   reposResult: any;
   isCurrentUser: boolean;
+  loadingFollowers: boolean;
+  loadingRepos: boolean;
 
   constructor(
     private route: ActivatedRoute,
@@ -42,16 +44,20 @@ export class UserDetailComponent implements OnInit {
   }
 
   private getFollowers(login: string, pageIndex: number, pageSize: number) {
+    this.loadingFollowers = true;
     this.githubApi.getFollowers(login, pageIndex, pageSize)
       .subscribe(result => {
+        this.loadingFollowers = false;
         this.followersResult = result;
         this.followersTitle = `Followers (${this.user.followers})`;
       });
   }
 
   private getRepos(login: string, pageIndex: number, pageSize: number) {
+    this.loadingRepos = true;
     this.githubApi.getRepositiories(login, pageIndex, pageSize)
       .subscribe(result => {
+        this.loadingRepos = false;
         this.reposResult = result;
       });
   }
